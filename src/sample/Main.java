@@ -2,6 +2,7 @@ package sample;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import sample.donnee.databaseconf.DatabaseConfDto;
 import sample.presentation.splash.SplashStage;
 import sample.service.CommonInjector;
 
@@ -15,6 +16,10 @@ public class Main extends Application {
 
         Stage splash = new SplashStage();
         splash.show();
+
+        DatabaseConfDto databaseConfDto = CommonInjector.getInstance().injectDatabaseConfSA().readDatabaseConf();
+
+        System.out.println(databaseConfDto);
     }
 
 

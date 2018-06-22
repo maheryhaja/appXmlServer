@@ -2,6 +2,8 @@ package sample.service;
 
 
 import javafx.application.Application;
+import sample.service.applicatif.databaseconf.DatabaseConfSA;
+import sample.service.applicatif.databaseconf.DatabaseConfSAImpl;
 import sample.service.applicatif.resources.ResourceSA;
 import sample.service.applicatif.resources.resourceSAImpl;
 
@@ -12,6 +14,8 @@ public class CommonInjector {
 
     //fields to inject somewhere
     private ResourceSA resourceSA;
+    private DatabaseConfSA databaseConfSA;
+
 
     private Application application = null;
 
@@ -43,6 +47,14 @@ public class CommonInjector {
             resourceSA = new resourceSAImpl();
         }
         return resourceSA;
+    }
+
+    public DatabaseConfSA injectDatabaseConfSA() {
+        if (databaseConfSA == null) {
+            databaseConfSA = new DatabaseConfSAImpl();
+        }
+
+        return databaseConfSA;
     }
 
 
