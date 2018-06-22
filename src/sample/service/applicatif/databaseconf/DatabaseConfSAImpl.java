@@ -81,6 +81,7 @@ public class DatabaseConfSAImpl implements DatabaseConfSA {
         databaseConfDto.setPassword(DEFAULTCONF.DatabaseConf.PASSWORD);
         databaseConfDto.setPort(DEFAULTCONF.DatabaseConf.PORT);
         databaseConfDto.setUser(DEFAULTCONF.DatabaseConf.USER);
+        databaseConfDto.setDatabaseName(DEFAULTCONF.DatabaseConf.DATABASENAME);
         return databaseConfDto;
     }
 

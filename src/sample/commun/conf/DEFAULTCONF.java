@@ -6,6 +6,7 @@ public interface DEFAULTCONF {
         int PORT = 3306;
         String USER = "root";
         String PASSWORD = "";
+        String DATABASENAME = "tpxml";
 
         String DEFAULTPATH = "database.conf";
     }

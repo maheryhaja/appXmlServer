@@ -6,6 +6,8 @@ import sample.service.applicatif.databaseconf.DatabaseConfSA;
 import sample.service.applicatif.databaseconf.DatabaseConfSAImpl;
 import sample.service.applicatif.resources.ResourceSA;
 import sample.service.applicatif.resources.resourceSAImpl;
+import sample.service.metier.databasemanager.DatabaseManager;
+import sample.service.metier.databasemanager.DatabaseManagerImpl;
 
 // responsable d'instancier tous les singletons
 public class CommonInjector {
@@ -15,6 +17,7 @@ public class CommonInjector {
     //fields to inject somewhere
     private ResourceSA resourceSA;
     private DatabaseConfSA databaseConfSA;
+    private DatabaseManager databaseManager;
 
 
     private Application application = null;
@@ -53,8 +56,15 @@ public class CommonInjector {
         if (databaseConfSA == null) {
             databaseConfSA = new DatabaseConfSAImpl();
         }
-
         return databaseConfSA;
+    }
+
+    public DatabaseManager injectDatabaseManager() {
+        if (databaseManager == null) {
+            databaseManager = new DatabaseManagerImpl();
+        }
+        return databaseManager;
+
     }
 
 

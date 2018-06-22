@@ -23,6 +23,9 @@ public class DatabaseConfDto {
     @XmlElement(name = "password")
     private String password;
 
+    @XmlElement(name = "database")
+    private String databaseName;
+
     public String getHost() {
         return host;
     }
@@ -55,6 +58,14 @@ public class DatabaseConfDto {
         this.password = password;
     }
 
+    public String getDatabaseName() {
+        return databaseName;
+    }
+
+    public void setDatabaseName(String databaseName) {
+        this.databaseName = databaseName;
+    }
+
     @Override
     public String toString() {
         return "DatabaseConfDto{" +
@@ -62,6 +73,7 @@ public class DatabaseConfDto {
                 ", port=" + port +
                 ", user='" + user + '\'' +
                 ", password='" + password + '\'' +
+                ", databaseName='" + databaseName + '\'' +
                 '}';
     }
 }
