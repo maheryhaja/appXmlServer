@@ -3,6 +3,7 @@ package sample.service.metier.databasemanager;
 import sample.commun.exception.DatabaseConnexionFailedException;
 import sample.commun.exception.GenericRuntimeException;
 import sample.commun.exception.NoConnectionToDatabaseException;
+import sample.commun.strings.SQLQUERY;
 import sample.donnee.databaseconf.DatabaseConfDto;
 
 import java.sql.Connection;
@@ -29,6 +30,7 @@ public class DatabaseManagerImpl implements DatabaseManager{
 
             connection.createStatement().executeUpdate("CREATE DATABASE if NOT EXISTS " + databaseConfDto.getDatabaseName());
             connection.createStatement().execute("use " + databaseConfDto.getDatabaseName());
+            connection.createStatement().executeUpdate(SQLQUERY.Queries.CREATE_TABLE);
 
         } catch (SQLException e) {
             e.printStackTrace();

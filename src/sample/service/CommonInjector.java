@@ -8,6 +8,10 @@ import sample.service.applicatif.resources.ResourceSA;
 import sample.service.applicatif.resources.resourceSAImpl;
 import sample.service.metier.databasemanager.DatabaseManager;
 import sample.service.metier.databasemanager.DatabaseManagerImpl;
+import sample.service.metier.etudiant.EtudiantRepository;
+import sample.service.metier.etudiant.EtudiantRepositoryImpl;
+
+import javax.xml.crypto.Data;
 
 // responsable d'instancier tous les singletons
 public class CommonInjector {
@@ -18,6 +22,7 @@ public class CommonInjector {
     private ResourceSA resourceSA;
     private DatabaseConfSA databaseConfSA;
     private DatabaseManager databaseManager;
+    private EtudiantRepository etudiantRepository;
 
 
     private Application application = null;
@@ -65,6 +70,14 @@ public class CommonInjector {
         }
         return databaseManager;
 
+    }
+
+    public EtudiantRepository injectEtudiantRepository() {
+        if (etudiantRepository == null) {
+            etudiantRepository = new EtudiantRepositoryImpl();
+        }
+
+        return etudiantRepository;
     }
 
 
