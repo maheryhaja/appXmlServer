@@ -1,18 +1,21 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import sample.commun.exception.GenericRuntimeException;
 import sample.donnee.databaseconf.DatabaseConfDto;
 import sample.donnee.etudiant.Etudiant;
 import sample.presentation.splash.SplashStage;
 import sample.service.CommonInjector;
+import sample.service.applicatif.server.ServerSA;
 import sample.service.metier.databasemanager.DatabaseManager;
 import sample.service.metier.etudiant.EtudiantRepository;
 
 public class Main extends Application {
 
     private DatabaseManager databaseManager;
+    private ServerSA serverSA;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -22,14 +25,18 @@ public class Main extends Application {
         CommonInjector.getInstance().initializeWithApp(this);
 
 
+
         Stage splash = new SplashStage();
         splash.show();
 
-        DatabaseConfDto databaseConfDto = CommonInjector.getInstance().injectDatabaseConfSA().readDatabaseConf();
+        serverSA = CommonInjector.getInstance().injectServerSA();
+
+        serverSA.isRunningObservable().subscribe(isRunning -> System.out.println(isRunning+" : server state"));
 
         try {
-            databaseManager = CommonInjector.getInstance().injectDatabaseManager();
-            databaseManager.openConnection(databaseConfDto);
+
+            serverSA.start();
+
             EtudiantRepository etudiantRepository = CommonInjector.getInstance().injectEtudiantRepository();
 
             Etudiant etudiant = new Etudiant();
@@ -38,9 +45,17 @@ public class Main extends Application {
             etudiant.setAddresse("67 Ha");
             etudiant.setId(1);
 
+//            etudiantRepository.create(etudiant);
             etudiantRepository.findAll().stream().forEach(System.out::println);
 
-            databaseManager.getConnection().close();
+            serverSA.stop();
+
+            Alert alert = new Alert(Alert.AlertType.WARNING, "une erreur");
+            alert.setHeaderText("Connexion vers la base échouée");
+            alert.setTitle("info");
+            alert.showAndWait();
+
+
         } catch (GenericRuntimeException e) {
 
             System.out.println(e.getMessage());

@@ -6,6 +6,8 @@ import sample.service.applicatif.databaseconf.DatabaseConfSA;
 import sample.service.applicatif.databaseconf.DatabaseConfSAImpl;
 import sample.service.applicatif.resources.ResourceSA;
 import sample.service.applicatif.resources.resourceSAImpl;
+import sample.service.applicatif.server.ServerSA;
+import sample.service.applicatif.server.ServerSAImpl;
 import sample.service.metier.databasemanager.DatabaseManager;
 import sample.service.metier.databasemanager.DatabaseManagerImpl;
 import sample.service.metier.etudiant.EtudiantRepository;
@@ -23,6 +25,7 @@ public class CommonInjector {
     private DatabaseConfSA databaseConfSA;
     private DatabaseManager databaseManager;
     private EtudiantRepository etudiantRepository;
+    private ServerSA serverSA;
 
 
     private Application application = null;
@@ -78,6 +81,13 @@ public class CommonInjector {
         }
 
         return etudiantRepository;
+    }
+
+    public ServerSA injectServerSA() {
+        if (serverSA == null) {
+            serverSA = new ServerSAImpl();
+        }
+        return serverSA;
     }
 
 
